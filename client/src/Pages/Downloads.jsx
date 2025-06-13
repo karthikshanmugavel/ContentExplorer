@@ -21,14 +21,14 @@ const Downloads = () => {
 
       if (mode === "Link") {
         const cleanedUrl = query.split("&")[0].split("?")[0]; // optional: frontend cleanup
-        const res = await axios.get("http://localhost:5000/api/info", {
+        const res = await axios.get("https://fast-api-phi-nine.vercel.app/api/info", {
           params: { url: cleanedUrl },
         });
         const video = { ...res.data, url: cleanedUrl };
         setVideos([video]);
         setFileSize(res.data.size);
       } else {
-        const res = await axios.get("http://localhost:5000/api/search", {
+        const res = await axios.get("https://fast-api-phi-nine.vercel.app/api/search", {
           params: { content: query, max_results: videoCount },
         });
         setVideos(res.data);
@@ -43,7 +43,7 @@ const Downloads = () => {
 
   const handleDownload = async (video) => {
     try {
-      const res = await axios.get("http://localhost:5000/api/download", {
+      const res = await axios.get("https://fast-api-phi-nine.vercel.app/api/download", {
         params: { url: video.url, format },
         responseType: "blob",
       });
